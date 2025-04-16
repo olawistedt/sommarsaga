@@ -98,7 +98,7 @@
       grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det.
       Du går fram till grinden och ser ditt snillrika lås. Det är ett mekaniskt lås av järn och har
       en panel som består av 10 knappar från 0 till 9. För att få rätt kod behöver du summera alla
-      resultat utifrån dessa siffror. Summan knappar du sedan in på panelen och är den rätt så öppnas
+      resultat utifrån magiska siffror. Summan knappar du sedan in på panelen och är den rätt så öppnas
       grinden.</p>
       <p>Exempel:<br>
       1 + 2 = 3<br>
@@ -107,7 +107,7 @@
   </div>
 
   <div class="input-container">
-    <button onclick="window.print()">🖨️ Skriv ut ledtrådarna</button>
+    <button onclick="window.print()">🖨️ Skriv ut magiska siffror</button>
     <br>
     <input type="number" id="userSum" placeholder="Koden till grinden..." onkeydown="checkOnEnter(event)">
     <p id="feedback"></p>
@@ -158,10 +158,14 @@
         feedback.className = '';
         feedback.innerHTML = `
           <span class="correct">Grinden öppnas med ett litet gnissel.</span><br><br>
-          Vilket påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn.
+          Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn.
           Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är
           öppen. När du går på vägen börjar du höra ljudet av hovar som klampar mot vägen. Du tittar över
-          axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak.
+          axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak. Och såklart är det
+          Talgelf, din gamla kompis. Du blir glad av att se honom. Ni pratar lite om tomater men sen säger Talgelf
+          att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska
+          formel som han gjort i alla år. Men Talgelf har blivit lite till åren och kanske är det så, medger han lite generat,
+          att han kanske har gjort fel när han blandat ihop raketkrutet.
         `;
       } else {
         feedback.className = 'incorrect';
