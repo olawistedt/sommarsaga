@@ -109,8 +109,7 @@
   <div class="input-container">
     <button onclick="window.print()">🖨️ Skriv ut ledtrådarna</button>
     <br>
-    <input type="number" id="userSum" placeholder="Din kod...">
-    <button onclick="checkSum()">Knappa in koden</button>
+    <input type="number" id="userSum" placeholder="Din kod..." onkeydown="checkOnEnter(event)">
     <p id="feedback"></p>
   </div>
 
@@ -142,6 +141,13 @@
       }
     }
 
+    function checkOnEnter(event) {
+      // Kontrollera om det är Enter-tangenten
+      if (event.key === 'Enter') {
+        checkSum();
+      }
+    }
+
     function checkSum() {
       const userSum = parseInt(document.getElementById('userSum').value);
       if (isNaN(userSum)) {
@@ -159,7 +165,7 @@
       }
     }
 
-    generateProblems(15, 5, 19);
+    generateProblems(2, 5, 19);
   </script>
 </body>
 </html>
