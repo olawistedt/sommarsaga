@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Räkneuppgifter – Dark Mode</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #90caf9;
+    }
+
+    input[type="number"] {
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      background-color: #1e1e1e;
+      color: #fff;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 150px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #2196f3;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #1976d2;
+    }
+
+    .correct {
+      color: #66bb6a;
+      font-weight: bold;
+    }
+
+    .incorrect {
+      color: #ef5350;
+      font-weight: bold;
+    }
+
+    ol {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Räkneuppgifter</h1>
+  <p>Räkna ut följande tal och ange summan av alla:</p>
+  <ul id="problems"></ul>
+
+  <input type="number" id="userSum" placeholder="Din kod...">
+  <button onclick="checkSum()">Knappa in koden</button>
+
+  <p id="feedback"></p>
+  <button onclick="window.print()">🖨️ Skriv ut sidan</button>
+
+  <script>
+    const antal = 2;
+    const minTal = 5;
+    const maxTal = 19;
+    const problemsList = document.getElementById('problems');
+    const feedback = document.getElementById('feedback');
+    let korrektSumma = 0;
+
+    function generateProblems() {
+      for (let i = 0; i < antal; i++) {
+        const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+        const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+        const summa = tal1 + tal2;
+        korrektSumma += summa;
+
+        const item = document.createElement('li');
+        item.textContent = `${tal1} + ${tal2} = `;
+        problemsList.appendChild(item);
+      }
+    }
+
+    function checkSum() {
+      const userSum = parseInt(document.getElementById('userSum').value);
+      if (isNaN(userSum)) {
+        feedback.textContent = 'Vänligen skriv in ett heltal.';
+        feedback.className = 'incorrect';
+        return;
+      }
+
+      if (userSum === korrektSumma) {
+        feedback.textContent = 'Rätt! Bra jobbat!';
+        feedback.className = 'correct';
+      } else {
+        feedback.textContent = 'Fel. Försök igen.';
+        feedback.className = 'incorrect';
+      }
+    }
+
+    generateProblems();
+  </script>
+</body>
+</html>
