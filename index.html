@@ -95,13 +95,21 @@
     <p>Du befinner dig vid utgången av ditt hus. Huset är rött och trädgården består av vildvuxit gräs
       med lite blandade blommor. Solen skiner på en himmel med några små moln. Det är ett staket runt
       gården och det finns en grusgång som leder ut ur trädgården. För att ta dig ut behöver du öppna
-      grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det.</p>
+      grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det.
+      Du går fram till grinden och ser ditt snillrika lås. Det är ett mekaniskt lås av järn och har
+      en panel som består av 10 knappar från 0 till 9. För att få rätt kod behöver du summera alla
+      resultat utifrån dessa siffror. Summan knappar du sedan in på panelen och är den rätt så öppnas
+      grinden.</p>
+      <p>Exempel:<br>
+      1 + 2 = 3<br>
+      3 + 4 = 7<br>
+      Rätt summa blir då 3 + 7 som är 10.</p>
   </div>
 
   <div class="input-container">
     <button onclick="window.print()">🖨️ Skriv ut ledtrådarna</button>
     <br>
-    <input type="number" id="userSum" placeholder="Din kod..." onkeydown="checkOnEnter(event)">
+    <input type="number" id="userSum" placeholder="Koden till grinden..." onkeydown="checkOnEnter(event)">
     <p id="feedback"></p>
   </div>
 
