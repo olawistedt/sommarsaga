@@ -52,24 +52,54 @@
       font-weight: bold;
     }
 
-    ol {
+    ul {
       padding-left: 20px;
+      list-style-type: disc;
+    }
+
+    /* Skriv ut bara problemområdet */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #print-area, #print-area * {
+        visibility: visible;
+      }
+
+      #print-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Räkneuppgifter</h1>
-  <p>Räkna ut följande tal och ange summan av alla:</p>
-  <ul id="problems"></ul>
 
+  <p>Du befinner dig vid utgången av ditt hus. Huset är rött och trädgården består av vildvuxit gräs
+    med lite blandade blommor. Solen skiner på en himmel med några små moln. Det är ett staket runt
+    gården och det finns en grusgång som leder ut ur trädgården. För att ta dig ut behöver du öppna
+    grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det.</p>
+
+  <!-- Endast detta område skrivs ut -->
+  <div id="print-area">
+    <h1>Räkneuppgifter</h1>
+    <p>Räkna ut följande tal och ange summan av alla:</p>
+    <ul id="problems"></ul>
+  </div>
+
+  <!-- Allt nedan syns inte i utskriften -->
+
+<button onclick="window.print()">🖨️ Skriv ut ledtrådarna</button>
+  <br>
   <input type="number" id="userSum" placeholder="Din kod...">
   <button onclick="checkSum()">Knappa in koden</button>
-
   <p id="feedback"></p>
-  <button onclick="window.print()">🖨️ Skriv ut sidan</button>
 
   <script>
-    const antal = 2;
+    const antal = 15;
     const minTal = 5;
     const maxTal = 19;
     const problemsList = document.getElementById('problems');
