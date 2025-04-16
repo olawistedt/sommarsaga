@@ -4,90 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>En sommarsaga</title>
-  <style>
-    body {
-      background-color: #121212;
-      color: #e0e0e0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: 20px;
-      line-height: 1.6;
-    }
-
-    h1 {
-      color: #90caf9;
-    }
-
-    input[type="number"], button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      background-color: #1e1e1e;
-      color: white;
-      font-size: 16px;
-      margin-top: 10px;
-      box-sizing: border-box;
-    }
-
-    button {
-      background-color: #2196f3;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #1976d2;
-    }
-
-    .input-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 10px;
-    }
-
-    .correct {
-      color: #66bb6a;
-      font-weight: bold;
-    }
-
-    .incorrect {
-      color: #ef5350;
-      font-weight: bold;
-    }
-
-    ul {
-      padding-left: 20px;
-      list-style-type: disc;
-    }
-
-    #print-area {
-      display: none;
-    }
-
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-
-      #print-area, #print-area * {
-        visibility: visible;
-        display: block !important;
-      }
-
-      #print-area {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-      }
-    }
-
-    #story {
-      max-width: 600px;
-      margin: 0 auto 30px auto;
-      padding: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -111,6 +28,9 @@
     <br>
     <input type="number" id="userSum" placeholder="Koden till grinden..." onkeydown="checkOnEnter(event)">
     <p id="feedback"></p>
+    <div id="story-next"></div>
+    <button id="continue-btn" style="display:none;" onclick="showNextText()">Fortsätt</button>
+    <div id="next-text" style="display:none;"></div>
   </div>
 
   <div id="print-area">
@@ -119,61 +39,6 @@
     <ul id="problems"></ul>
   </div>
 
-  <script>
-    const problemsList = document.getElementById('problems');
-    const feedback = document.getElementById('feedback');
-    let korrektSumma = 0;
-
-    function generateProblems(antal, minTal, maxTal) {
-      problemsList.innerHTML = '';
-      korrektSumma = 0;
-
-      for (let i = 0; i < antal; i++) {
-        const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
-        const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
-        const summa = tal1 + tal2;
-        korrektSumma += summa;
-
-        const item = document.createElement('li');
-        item.textContent = `${tal1} + ${tal2} = `;
-        problemsList.appendChild(item);
-      }
-    }
-
-    function checkOnEnter(event) {
-      if (event.key === 'Enter') {
-        checkSum();
-      }
-    }
-
-    function checkSum() {
-      const userSum = parseInt(document.getElementById('userSum').value);
-      if (isNaN(userSum)) {
-        feedback.textContent = 'Skriv in ett heltal.';
-        feedback.className = 'incorrect';
-        return;
-      }
-
-      if (userSum === korrektSumma) {
-        feedback.className = '';
-        feedback.innerHTML = `
-          <span class="correct">Grinden öppnas med ett litet gnissel.</span><br><br>
-          Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn.
-          Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är
-          öppen. När du går på vägen börjar du höra ljudet av hovar som klampar mot vägen. Du tittar över
-          axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak. Och såklart är det
-          Talgelf, din gamla kompis. Du blir glad av att se honom. Ni pratar lite om tomater men sen säger Talgelf
-          att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska
-          formel som han gjort i alla år. Men Talgelf har blivit lite till åren och kanske är det så, medger han lite generat,
-          att han kanske har gjort fel när han blandat ihop raketkrutet.
-        `;
-      } else {
-        feedback.className = 'incorrect';
-        feedback.textContent = 'Det mekaniska låset ger ifrån sig ett klick, men grinden öppnas inte. Försök igen.';
-      }
-    }
-
-    generateProblems(2, 5, 19);
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
