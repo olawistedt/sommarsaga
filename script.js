@@ -3,6 +3,7 @@ const feedback = document.getElementById('feedback');
 const storyNext = document.getElementById('story-next');
 const continueBtn = document.getElementById('continue-btn');
 const nextText = document.getElementById('next-text');
+const printArea = document.getElementById('print-area');
 let korrektSumma = 0;
 
 function generateProblems(antal, minTal, maxTal) {
@@ -17,6 +18,12 @@ function generateProblems(antal, minTal, maxTal) {
 
     const item = document.createElement('li');
     item.textContent = `${tal1} + ${tal2} = `;
+    
+    const answerInput = document.createElement('input');
+    answerInput.type = 'number';
+    answerInput.className = 'problem-answer no-print';
+    
+    item.appendChild(answerInput);
     problemsList.appendChild(item);
   }
 }
@@ -37,8 +44,9 @@ function checkSum() {
 
   if (userSum === korrektSumma) {
     feedback.className = '';
-    feedback.innerHTML = `<span class="correct">Grinden öppnas med ett litet gnissel.</span>`;
-    storyNext.innerHTML = '';
+    feedback.innerHTML = `
+      <span class="correct">Grinden öppnas med ett litet gnissel.</span><br><br>
+    `;
     continueBtn.style.display = 'block';
   } else {
     feedback.className = 'incorrect';
@@ -47,8 +55,8 @@ function checkSum() {
 }
 
 function showNextText() {
-  nextText.style.display = 'block';
   continueBtn.style.display = 'none';
+  nextText.style.display = 'block';
   nextText.innerHTML = `
     <p>Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn.
     Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är
@@ -58,14 +66,11 @@ function showNextText() {
     att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska
     formel som han gjort i alla år. Men Talgelf har blivit lite till åren och kanske är det så, medger han lite generat,
     att han kanske har gjort fel när han blandat ihop raketkrutet.</p>
-    <p>Du bestämmer dig för att hjälpa Talgelf med fyrverkerierna. Varje ingrediens har en vikt, för att
-    det ska fungera måste alla ingredienser blandas enligt formeln.</p>
   `;
 }
 
-generateProblems(2, 5, 19);
-
-function showProblems() {
-  const printArea = document.getElementById('print-area');
+function showOnScreenProblems() {
   printArea.style.display = 'block';
 }
+
+generateProblems(2, 5, 19);

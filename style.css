@@ -11,11 +11,10 @@ h1 {
 }
 
 input[type="number"], button {
-  width: 100%;
   padding: 12px;
   border: none;
   border-radius: 5px;
-  background-color: #1e1e1e;
+  background-color: #1a1a1a;
   color: white;
   font-size: 16px;
   margin-top: 10px;
@@ -23,16 +22,16 @@ input[type="number"], button {
 }
 
 button {
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: #2c2c2c;
   font-weight: bold;
   cursor: pointer;
-  border: 1px solid #333;
+  margin-right: 10px;
 }
 
 button:hover {
-  background-color: #2a2a2a;
+  background-color: #444;
 }
+
 .input-container {
   max-width: 600px;
   margin: 0 auto;
@@ -56,8 +55,23 @@ ul {
 
 #print-area {
   display: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
+.problem-answer {
+  margin-top: 5px;
+  width: 100%;
+  padding: 10px;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  color: white;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Utskriftsinställningar */
 @media print {
   body * {
     visibility: hidden;
@@ -68,6 +82,10 @@ ul {
     display: block !important;
   }
 
+  .no-print {
+    display: none !important;
+  }
+
   #print-area {
     position: absolute;
     top: 0;
@@ -76,52 +94,7 @@ ul {
   }
 }
 
-#story {
-  max-width: 600px;
-  margin: 0 auto 30px auto;
-  padding: 10px;
-}
-
-#story-next {
-  display: none;
-}
-
-#next-text {
-  max-width: 600px;
-  margin: 0 auto 30px auto;
-  padding: 10px;
-  color: #e0e0e0;
-  font-size: 16px;
-}
-
-#continue-btn {
-  width: auto;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: #1e1e1e;
-  color: white;
-  font-size: 16px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-#continue-btn:hover {
-  background-color: #1976d2;
-}
-
-.button-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.button-row button {
-  flex: 1;
-}
-
-.content-container {
+#story, #story-next, #next-text {
   max-width: 600px;
   margin: 0 auto 30px auto;
   padding: 10px;
