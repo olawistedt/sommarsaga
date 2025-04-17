@@ -17,7 +17,7 @@
       en panel som består av 10 knappar från 0 till 9. För att få rätt kod behöver du summera alla
       resultat utifrån magiska siffror. Summan knappar du sedan in på panelen och är den rätt så öppnas
       grinden.</p>
-    <p>Exempel:<br>
+      <p>Exempel:<br>
       1 + 2 = 3<br>
       3 + 4 = 7<br>
       Rätt summa blir då 3 + 7 som är 10.</p>
@@ -29,17 +29,26 @@
       <p>Räkna ut följande tal och ange summan av alla:</p>
       <ul id="problems"></ul>
     </div>
-    
-    <button onclick="window.print()" class="no-print">🖨️ Skriv ut magiska siffror</button>
-    <button onclick="showOnScreenProblems()" class="no-print">💻 Räkna på skärm</button>
-
-
+      <button onclick="window.print()">🖨️ Skriv ut magiska siffror</button>
+    <button id="show-screen-btn">💻 Räkna på skärm</button>
+    <br>
     <input type="number" id="userSum" placeholder="Koden till grinden..." onkeydown="checkOnEnter(event)">
     <p id="feedback"></p>
-
     <div id="story-next"></div>
-    <button id="continue-btn" class="no-print" style="display:none;" onclick="showNextText()">Fortsätt</button>
+    <button id="continue-btn" style="display:none;" onclick="showNextText()">Fortsätt</button>
     <div id="next-text" style="display:none;"></div>
+  </div>
+
+
+  <div id="new-problem-section" class="input-container" style="display:none;">
+    <h2>Nu ett nytt problem</h2>
+    <p>Räkna ut summan av de tre tal som visas nedan:</p>
+    <ul id="new-problem-list"></ul>
+    <input type="number" id="new-problem-answer" placeholder="Ditt svar...">
+    <button onclick="checkNewProblem()">Kontrollera svaret</button>
+    <p id="new-problem-feedback"></p>
+    <button onclick="window.print()">🖨️ Skriv ut magiska siffror</button>
+    <button id="show-screen-btn-2">💻 Räkna på skärm</button>
   </div>
 
   <script src="script.js"></script>
