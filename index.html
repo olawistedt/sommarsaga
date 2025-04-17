@@ -23,24 +23,26 @@
       Rätt summa blir då 3 + 7 som är 10.</p>
   </div>
 
+  <div class="content-container">
+    <div id="print-area" style="display:none;">
+      <h1>Formler</h1>
+      <p>Räkna ut följande tal och ange summan av alla:</p>
+      <ul id="problems"></ul>
+    </div>
+  </div>
+    
   <div class="input-container">
+    <input type="number" id="userSum" placeholder="Koden till grinden..." onkeydown="checkOnEnter(event)">
     <div class="button-row">
       <button onclick="window.print()">🖨️ Skriv ut magiska siffror</button>
       <button onclick="showProblems()">🧮 Räkna på skärm</button>
     </div>
-    <input type="number" id="userSum" placeholder="Koden till grinden..." onkeydown="checkOnEnter(event)">
     <p id="feedback"></p>
     <div id="story-next"></div>
     <button id="continue-btn" style="display:none;" onclick="showNextText()">Fortsätt</button>
     <div id="next-text" style="display:none;"></div>
   </div>
-  
-  <div id="print-area">
-    <h1>Formler</h1>
-    <p>Räkna ut följande tal och ange summan av alla:</p>
-    <ul id="problems"></ul>
-  </div>
-  
+    
   <script src="script.js"></script>
 </body>
 </html>

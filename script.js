@@ -58,11 +58,14 @@ function showNextText() {
     att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska
     formel som han gjort i alla år. Men Talgelf har blivit lite till åren och kanske är det så, medger han lite generat,
     att han kanske har gjort fel när han blandat ihop raketkrutet.</p>
+    <p>Du bestämmer dig för att hjälpa Talgelf med fyrverkerierna. Varje ingrediens har en vikt, för att
+    det ska fungera måste alla ingredienser blandas enligt formeln.</p>
   `;
 }
 
 generateProblems(2, 5, 19);
 
 function showProblems() {
-  document.getElementById('print-area').style.display = 'block';
+  const printArea = document.getElementById('print-area');
+  printArea.style.display = 'block';
 }
