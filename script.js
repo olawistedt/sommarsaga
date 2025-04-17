@@ -1,12 +1,12 @@
 const problemsList = document.getElementById('problems');
-const newProblemList = document.getElementById('new-problem-list');
+const newProblemList = document.getElementById('problem2-list');
 const feedback = document.getElementById('feedback');
-const newProblemFeedback = document.getElementById('new-problem-feedback');
+const newProblemFeedback = document.getElementById('problem2-feedback');
 const userSum = document.getElementById('userSum');
 let korrektSumma = 0;
 let newProblemSum = 0;
 
-function generateProblems(antal, minTal, maxTal) {
+function generateProblem1(antal, minTal, maxTal) {
   problemsList.innerHTML = '';
   korrektSumma = 0;
 
@@ -22,16 +22,19 @@ function generateProblems(antal, minTal, maxTal) {
   }
 }
 
-function generateNewProblem(minTal, maxTal) {
+function generateProblem2(antal, minTal, maxTal) {
   newProblemList.innerHTML = '';
   newProblemSum = 0;
 
-  for (let i = 0; i < 3; i++) {
-    const tal = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
-    newProblemSum += tal;
+  for (let i = 0; i < antal; i++) {
+    const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+    const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+    const tal3 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+    summa = tal1 + tal2 + tal3;
+    korrektSumma += summa;
 
     const item = document.createElement('li');
-    item.textContent = tal;
+    item.textContent = `${tal1} + ${tal2} + ${tal3} = `;
     newProblemList.appendChild(item);
   }
 }
@@ -64,7 +67,7 @@ function checkSum() {
       att han kanske har gjort fel när han blandat ihop raketkrutet.
     `;
     document.getElementById('continue-btn').style.display = 'inline-block';
-    generateNewProblem(5, 19);
+    generateProblem2(2, 5, 19);
   } else {
     feedback.className = 'incorrect';
     feedback.textContent = 'Det mekaniska låset ger ifrån sig ett klick, men grinden öppnas inte. Försök igen.';
@@ -75,12 +78,12 @@ function showNextText() {
   document.getElementById('next-text').innerHTML = `
     <p>Du har nu stött på ett nytt problem. Räknar du rätt, kommer du vidare på din resa!</p>
   `;
-  document.getElementById('new-problem-section').style.display = 'block';
+  document.getElementById('problem2-section').style.display = 'block';
   document.getElementById('continue-btn').style.display = 'none';
 }
 
 function checkNewProblem() {
-  const userInput = parseInt(document.getElementById('new-problem-answer').value);
+  const userInput = parseInt(document.getElementById('problem2-answer').value);
   if (userInput === newProblemSum) {
     newProblemFeedback.className = 'correct';
     newProblemFeedback.textContent = 'Rätt svar! Du har löst problemet.';
@@ -92,12 +95,12 @@ function checkNewProblem() {
 
 document.getElementById('show-screen-btn').addEventListener('click', function () {
   document.getElementById('print-area').style.display = 'block';
-  generateProblems(2, 5, 19);
+  generateProblem1(2, 5, 19);
 });
 
 document.getElementById('show-screen-btn-2').addEventListener('click', function () {
   document.getElementById('print-area').style.display = 'block';
-  generateNewProblem(5, 19);
+  generateProblem2(2, 5, 19);
 });
 
-generateProblems(2, 5, 19);
+generateProblem1(2, 5, 19);
