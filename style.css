@@ -109,3 +109,13 @@ ul {
 #continue-btn:hover {
   background-color: #1976d2;
 }
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.button-row button {
+  flex: 1;
+}

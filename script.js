@@ -62,3 +62,7 @@ function showNextText() {
 }
 
 generateProblems(2, 5, 19);
+
+function showProblems() {
+  document.getElementById('print-area').style.display = 'block';
+}
