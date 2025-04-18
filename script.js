@@ -1,10 +1,10 @@
-const problemsList = document.getElementById('problems');
+const problemsList = document.getElementById('problem1-list');
 const newProblemList = document.getElementById('problem2-list');
 const feedback = document.getElementById('feedback');
 const newProblemFeedback = document.getElementById('problem2-feedback');
 const userSum = document.getElementById('userSum');
 let korrektSumma = 0;
-let newProblemSum = 0;
+let problem2Sum = 0;
 
 function generateProblem1(antal, minTal, maxTal) {
   problemsList.innerHTML = '';
@@ -24,14 +24,14 @@ function generateProblem1(antal, minTal, maxTal) {
 
 function generateProblem2(antal, minTal, maxTal) {
   newProblemList.innerHTML = '';
-  newProblemSum = 0;
+  problem2Sum = 0;
 
   for (let i = 0; i < antal; i++) {
     const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
     const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
     const tal3 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
     summa = tal1 + tal2 + tal3;
-    korrektSumma += summa;
+    problem2Sum += summa;
 
     const item = document.createElement('li');
     item.textContent = `${tal1} + ${tal2} + ${tal3} = `;
@@ -42,6 +42,12 @@ function generateProblem2(antal, minTal, maxTal) {
 function checkOnEnter(event) {
   if (event.key === 'Enter') {
     checkSum();
+  }
+}
+
+function checkOnEnterProblem2(event) {
+  if (event.key === 'Enter') {
+    checkProblem2();
   }
 }
 
@@ -82,9 +88,9 @@ function showNextText() {
   document.getElementById('continue-btn').style.display = 'none';
 }
 
-function checkNewProblem() {
+function checkProblem2() {
   const userInput = parseInt(document.getElementById('problem2-answer').value);
-  if (userInput === newProblemSum) {
+  if (userInput === problem2Sum) {
     newProblemFeedback.className = 'correct';
     newProblemFeedback.textContent = 'Rätt svar! Du har löst problemet.';
   } else {

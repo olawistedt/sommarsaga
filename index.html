@@ -28,7 +28,7 @@
     <div id="print-area">
       <h1>Formler</h1>
       <p>Räkna ut följande tal och ange summan av alla:</p>
-      <ul id="problems"></ul>
+      <ul id="problem1-list"></ul>
     </div>
       <button onclick="window.print()">🖨️ Skriv ut magiska siffror</button>
     <button id="show-screen-btn">💻 Räkna ut kod på skärm</button>
@@ -43,13 +43,12 @@
   <div id="problem2-section" class="input-container" style="display:none;">
     <p>Räkna ut summan av de tre tal som visas nedan:</p>
     <ul id="problem2-list"></ul>
-    <input type="number" id="problem2-answer" placeholder="Ditt svar...">
-    <button onclick="checkNewProblem()">Kontrollera svaret</button>
+    <input type="number" id="problem2-answer" placeholder="Den sammanlagda vikten..." onkeydown="checkOnEnterProblem2(event)">
     <p id="problem2-feedback"></p>
-    <div id="print-area">
-      <h1>Formler2</h1>
+    <div id="print-area-2">
+      <h2>Kapitel 2</h2>
       <p>Räkna ut följande tal och ange summan av alla:</p>
-      <ul id="problems"></ul>
+      <ul id="problem2-list"></ul>
     </div>
     <button onclick="window.print()">🖨️ Skriv ut magiska siffror</button>
     <button id="show-screen-btn-2">💻 Räkna ut recept på skärm</button>
