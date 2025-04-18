@@ -1,5 +1,5 @@
-const problemsList = document.getElementById('problem1-list');
-const newProblemList = document.getElementById('problem2-list');
+const problem1List = document.getElementById('problem1-list');
+const problem2List = document.getElementById('problem2-list');
 const feedback = document.getElementById('feedback');
 const newProblemFeedback = document.getElementById('problem2-feedback');
 const userSum = document.getElementById('userSum');
@@ -7,7 +7,7 @@ let korrektSumma = 0;
 let problem2Sum = 0;
 
 function generateProblem1(antal, minTal, maxTal) {
-  problemsList.innerHTML = '';
+  problem1List.innerHTML = '';
   korrektSumma = 0;
 
   for (let i = 0; i < antal; i++) {
@@ -18,12 +18,12 @@ function generateProblem1(antal, minTal, maxTal) {
 
     const item = document.createElement('li');
     item.textContent = `${tal1} + ${tal2} = `;
-    problemsList.appendChild(item);
+    problem1List.appendChild(item);
   }
 }
 
 function generateProblem2(antal, minTal, maxTal) {
-  newProblemList.innerHTML = '';
+  problem2List.innerHTML = '';
   problem2Sum = 0;
 
   for (let i = 0; i < antal; i++) {
@@ -35,8 +35,29 @@ function generateProblem2(antal, minTal, maxTal) {
 
     const item = document.createElement('li');
     item.textContent = `${tal1} + ${tal2} + ${tal3} = `;
-    newProblemList.appendChild(item);
+    problem2List.appendChild(item);
   }
+}
+
+function printList(listElement) {
+  const printArea = document.getElementById("print-area");
+  const content = document.getElementById("print-content");
+
+  // Clear content of print area first
+  content.innerHTML = '';
+
+  // Clone the passed list and append it to the print content
+  const clonedList = listElement.cloneNode(true);
+  content.appendChild(clonedList);
+
+  // Temporarily show print area
+  printArea.style.display = "block";
+
+  // Print
+  window.print();
+
+  // Hide again after printing
+  printArea.style.display = "none";
 }
 
 function checkOnEnter(event) {
@@ -101,12 +122,12 @@ function checkProblem2() {
 
 document.getElementById('show-screen-btn').addEventListener('click', function () {
   document.getElementById('print-area').style.display = 'block';
-  generateProblem1(2, 5, 19);
+  generateProblem1(1, 5, 19);
 });
 
 document.getElementById('show-screen-btn-2').addEventListener('click', function () {
   document.getElementById('print-area').style.display = 'block';
-  generateProblem2(2, 5, 19);
+  generateProblem2(1, 5, 19);
 });
 
 generateProblem1(2, 5, 19);
