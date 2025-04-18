@@ -25,13 +25,6 @@
   </div>
 
   <div class="input-container">
-<!--
-    <div id="print-area">
-      <h1>Kapitel 1</h1>
-      <p>Räkna ut följande tal och ange summan av alla:</p>
-      <ul id="problem1-list"></ul>
-    </div>
--->
 
     <div id="print-area" style="display: none;">
       <h1>Din magiska text</h1>
@@ -41,8 +34,6 @@
     <ul id="problem1-list"></ul>
     
     <button onclick="printList(document.getElementById('problem1-list'))">🖨️ Skriv ut magiska siffror 1</button>
-
-<!--      <button onclick="window.print()">🖨️ Skriv ut magiska siffror</button> -->
     <button id="show-screen-btn">💻 Räkna ut kod på skärm</button>
     <br>
     <input type="number" id="userSum" placeholder="Koden till grinden..." onkeydown="checkOnEnter(event)">
@@ -57,13 +48,6 @@
     <ul id="problem2-list"></ul>
     <input type="number" id="problem2-answer" placeholder="Den sammanlagda vikten..." onkeydown="checkOnEnterProblem2(event)">
     <p id="problem2-feedback"></p>
-
-<!--    <div id="print-area-2">
-      <h1>Kapitel 2</h1>
-      <p>Räkna ut följande tal och ange summan av alla:</p>
-      <ul id="problem2-list"></ul>
-    </div>
--->
     <ul id="problem2-list"></ul>
 
     <button onclick="printList(document.getElementById('problem2-list'))">🖨️ Skriv ut magiska siffror 2</button>
