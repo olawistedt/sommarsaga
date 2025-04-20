@@ -7,37 +7,44 @@
 <body>
   <p id="chapter"></p>
   <input type="number" id="answer" placeholder="Den magiska koden..." onkeydown="checkOnEnter(event)">
+
   <script>
     let onChapter = 1;
-    if(onChapter == 1) {
-         document.getElementById("chapter").innerHTML = `Du befinner dig vid utgången av ditt hus. Huset är rött och trädgården består av vildvuxit gräs med lite blandade blommor.
-         Solen skiner på en himmel med några små moln. Det är ett staket runt gården och det finns en grusgång som leder ut ur trädgården.
-         För att ta dig ut behöver du öppna grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det.
-         Du går fram till grinden och ser ditt snillrika lås. Det är ett mekaniskt lås av järn och har en panel som består av 10 knappar från 0 till 9.
-         För att få rätt kod behöver du summera alla resultat utifrån magiska siffror. Summan knappar du sedan in på panelen och är den rätt så öppnas grinden.`;
+
+    function showChapter() {
+      const chapterText = {
+        1: `Du befinner dig vid utgången av ditt hus. Huset är rött och trädgården består av vildvuxit gräs med lite blandade blommor.
+        Solen skiner på en himmel med några små moln. Det är ett staket runt gården och det finns en grusgång som leder ut ur trädgården.
+        För att ta dig ut behöver du öppna grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det.
+        Du går fram till grinden och ser ditt snillrika lås. Det är ett mekaniskt lås av järn och har en panel som består av 10 knappar från 0 till 9.
+        För att få rätt kod behöver du summera alla resultat utifrån magiska siffror. Summan knappar du sedan in på panelen och är den rätt så öppnas grinden.`,
+        
+        2: `Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn.
+        Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är
+        öppen. När du går på vägen börjar du höra ljudet av hovar som klampar mot vägen. Du tittar över
+        axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak. Och såklart är det
+        Talgalf, din gamla kompis. Du blir glad av att se honom. Ni pratar lite om tomater men sen säger Talgalf
+        att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska
+        formel som han gjort i alla år. Men Talgalf har blivit lite till åren och kanske är det så, medger han lite generat,
+        att han kanske har gjort fel när han blandat ihop raketkrutet.`
+      };
+
+      document.getElementById("chapter").innerText = chapterText[onChapter] || "Slut på sagan!";
     }
-    else if(onChapter == 2) {
-      document.getElementById("chapter").innerHTML = `Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn.
-          Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är
-          öppen. När du går på vägen börjar du höra ljudet av hovar som klampar mot vägen. Du tittar över
-          axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak. Och såklart är det
-          Talgalf, din gamla kompis. Du blir glad av att se honom. Ni pratar lite om tomater men sen säger Talgalf
-          att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska
-          formel som han gjort i alla år. Men Talgalf har blivit lite till åren och kanske är det så, medger han lite generat,
-          att han kanske har gjort fel när han blandat ihop raketkrutet.`;
-    }
-  function checkOnEnter(event) {
-    if (event.key === 'Enter') {
-  //    checkSum();
-      const value = event.target.value; 
-//      alert('Du skrev: ' + value);
-      if(value == 11) {
-        onChapter++;
-        location.reload();
+
+    function checkOnEnter(event) {
+      if (event.key === 'Enter') {
+        const value = parseInt(event.target.value);
+        if (value === 11) {
+          onChapter++;
+          showChapter();
+          event.target.value = ''; // Clear input
+        }
       }
     }
-  }
 
+    // Show first chapter on page load
+    showChapter();
   </script>
 </body>
 </html>
