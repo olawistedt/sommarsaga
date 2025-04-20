@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Sommarsaga</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1 id="desc"></h1>
@@ -77,27 +77,36 @@
     function generateProblem(problemNr, antal, minTal, maxTal) {
       const problemList = document.getElementById("print-content");
       problemList.innerHTML = '';
-      currentCorrectAnswer = 0;
+
+      let allAnswers = [];
 
       for (let i = 0; i < antal; i++) {
-        if(problemNr == 1) {
+        if (problemNr == 1) {
           const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
           const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
           const answer = tal1 + tal2;
-          currentCorrectAnswer += answer;
+          allAnswers.push(answer);
           const item = document.createElement('li');
           item.textContent = `${tal1} + ${tal2} = `;
           problemList.appendChild(item);
         }
-        if(problemNr == 2) {
+        if (problemNr == 2) {
           const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
           const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
           const tal3 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
-          const summa = tal1 + tal2 + tal3;
-          currentCorrectAnswer += summa;
+          const answer = tal1 + tal2 + tal3;
+          allAnswers.push(answer);
           const item = document.createElement('li');
           item.textContent = `${tal1} + ${tal2} + ${tal3} = `;
           problemList.appendChild(item);
+        }
+      }
+
+      const digitString = allAnswers.join('');
+      currentCorrectAnswer = 0;
+      for (let char of digitString) {
+        if (['2', '4', '6', '8'].includes(char)) {
+          currentCorrectAnswer++;
         }
       }
     }
