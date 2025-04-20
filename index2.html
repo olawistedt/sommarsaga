@@ -36,7 +36,9 @@
         if (value === 11) {
           onChapter++;
           showChapter();
+          generateProblem(onChapter, 2, 5, 19)
           event.target.value = ''; // Clear input
+          document.getElementById("print-area").style.display = "none";
         }
         if(onChapter === 3) { // Hide inputs when the story ends.
           document.getElementById("inputs").style.display = "none";
@@ -45,7 +47,6 @@
     }
 
     function printList() {
-      generateProblem(3, 5, 19)
       window.print();
     }
 
@@ -53,24 +54,34 @@
       document.getElementById("print-area").style.display = "block";
     }
 
-    function generateProblem(antal, minTal, maxTal) {
+    function generateProblem(problemNr, antal, minTal, maxTal) {
       const problemList = document.getElementById("print-content");
       problemList.innerHTML = '';
       currentCorrectAnswer = 0;
 
       for (let i = 0; i < antal; i++) {
-        const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
-        const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
-        const answer = tal1 + tal2;
-        currentCorrectAnswer += answer;
-
-        const item = document.createElement('li');
-        item.textContent = `${tal1} + ${tal2} = `;
-        problemList.appendChild(item);
+        if(problemNr == 1) {
+          const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+          const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+          const answer = tal1 + tal2;
+          currentCorrectAnswer += answer;
+          const item = document.createElement('li');
+          item.textContent = `${tal1} + ${tal2} = `;
+          problemList.appendChild(item);
+        }
+        if(problemNr == 2) {
+          const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+          const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+          const tal3 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+          const summa = tal1 + tal2 + tal3;
+          currentCorrectAnswer += summa;
+          const item = document.createElement('li');
+          item.textContent = `${tal1} + ${tal2} + ${tal3} = `;
+          problemList.appendChild(item);
+        }
       }
     }
-
-
+    generateProblem(onChapter, 1, 5, 19)
     // Show first chapter on page load
     showChapter();
   </script>
