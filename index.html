@@ -31,27 +31,34 @@
       <p id="print-content"></p>
     </div>
 
-    <ul id="problem1-list"></ul>
-    
-    <button onclick="printList(document.getElementById('problem1-list'))">🖨️ Skriv ut magiska siffror 1</button>
-    <button id="show-screen-btn">💻 Räkna ut kod på skärm</button>
-    <br>
+    <!-- Problem 1 -->
+    <ul id="problem1-list" style="display: none;"></ul>
     <input type="number" id="userSum" placeholder="Koden till grinden..." onkeydown="checkOnEnter(event)">
+    <br>
+    <button onclick="printList(document.getElementById('problem1-list'))">🖨️ Skriv ut magiska siffror 1</button>
+    <button id="show-screen-btn" onclick="showProblem1()">💻 Räkna ut kod på skärm</button>
+    <br>
     <p id="feedback"></p>
     <div id="story-next"></div>
-    <button id="continue-btn" style="display:none;" onclick="showNextText()">Fortsätt</button>
     <div id="next-text" style="display:none;"></div>
   </div>
 
+  <!-- Problem 2 -->
   <div id="problem2-section" class="input-container" style="display:none;">
-    <p>Räkna ut summan av de tre tal som visas nedan:</p>
     <ul id="problem2-list"></ul>
     <input type="number" id="problem2-answer" placeholder="Den sammanlagda vikten..." onkeydown="checkOnEnterProblem2(event)">
     <p id="problem2-feedback"></p>
-    <ul id="problem2-list"></ul>
-
     <button onclick="printList(document.getElementById('problem2-list'))">🖨️ Skriv ut magiska siffror 2</button>
-    <button id="show-screen-btn-2">💻 Räkna ut recept på skärm</button>
+    <button id="show-screen-btn-2" onclick="showProblem2()">💻 Räkna ut recept på skärm</button>
+  </div>
+
+  <!-- Problem 3 -->
+  <div id="problem3-section" class="input-container" style="display:none;">
+    <ul id="problem3-list"></ul>
+    <input type="number" id="problem3-answer" placeholder="Den magiska produkten..." onkeydown="checkOnEnterProblem3(event)">
+    <p id="problem3-feedback"></p>
+    <button onclick="printList(document.getElementById('problem3-list'))">🖨️ Skriv ut magiska siffror 3</button>
+    <button id="show-screen-btn-3" onclick="showProblem3()">💻 Räkna ut formel på skärm</button>
   </div>
 
   <script src="script.js"></script>
