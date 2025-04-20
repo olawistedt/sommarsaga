@@ -7,22 +7,37 @@
   <link rel="stylesheet" href="style2.css">
 </head>
 <body>
-  <h1>Sommarsaga</h1>
+  <h1 id="desc"></h1>
+  <img src="grinden.png" style="width: 40%; display: block; margin: 0 auto;">
   <p id="chapter"></p>
   <div id="print-area" style="display: none;">
-    <h2>Dina magiska tal</h2>
+    <h3>Dina magiska tal</h3>
+    <p>Räkna ut alla uppgifterna. Ta sen och räkna antalet 2'or, 4'or, 6'or och 8'or i svaren, magisk kod.</p>
     <ul id="print-content"></ul>
   </div>
   <div id="inputs">
-    <input type="number" id="answer" placeholder="Den magiska koden..." onkeydown="checkOnEnter(event)">
+    <input type="number" id="answer" placeholder="Skriv in magisk kod..." onkeydown="checkOnEnter(event)">
     <button onclick="printList()">🖨️ Skriv ut magiska tal</button>
-    <button id="show-screen-btn" onclick="showProblem()">💻 Räkna ut kod på skärm</button>
+    <button id="show-screen-btn" onclick="showProblem()">💻 Visa magiska tal på skärm</button>
   </div>
+  <!-- ============================== -->
+  <!-- Javascript section begins here -->
+  <!-- ============================== -->
   <script>
     let onChapter = 1;
     let currentCorrectAnswer = 0;
 
-    function showChapter() {
+    function showDescription() {
+      const descriptionText = {
+        1: `Grinden`,
+        2: `Trollkarlen`,
+        3: `Repflotten`,
+        4: `Affären`
+      };
+      document.getElementById("desc").innerText = descriptionText[onChapter] || "Sovdags";
+    }
+
+  function showChapter() {
       const chapterText = {
         1: `Du befinner dig vid utgången av ditt hus. Huset är rött och trädgården består av vildvuxit gräs med lite blandade blommor. Solen skiner på en himmel med några små moln. Det är ett staket runt gården och det finns en grusgång som leder ut ur trädgården. För att ta dig ut behöver du öppna grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det. Du går fram till grinden och ser ditt snillrika lås. Det är ett mekaniskt lås av järn och har en panel som består av 10 knappar från 0 till 9. För att få rätt kod behöver du summera alla resultat utifrån magiska siffror. Summan knappar du sedan in på panelen och är den rätt så öppnas grinden.`,
         2: `Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn. Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är öppen. När du går på vägen börjar du höra ljudet av hovar som klampar mot vägen. Du tittar över axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak. Och såklart är det Talgalf, din gamla kompis. Du blir glad av att se honom. Ni pratar lite om tomater men sen säger Talgalf att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska formel som han gjort i alla år. Men Talgalf har blivit lite till åren och kanske är det så, medger han lite generat, att han kanske har gjort fel när han blandat ihop raketkrutet.`
@@ -33,12 +48,17 @@
     function checkOnEnter(event) {
       if (event.key === 'Enter') {
         const value = parseInt(event.target.value);
-        if (value === 11) {
+        if (value === currentCorrectAnswer) {
           onChapter++;
+          showDescription();
           showChapter();
-          generateProblem(onChapter, 2, 5, 19)
+          generateProblem(onChapter, 1, 5, 19)
           event.target.value = ''; // Clear input
           document.getElementById("print-area").style.display = "none";
+          // Byt ut bilden om kapitlet är 2 (Trollkarlen)
+          if (onChapter === 2) {
+            document.querySelector("img").src = "trollkarlen.png";
+          }
         }
         if(onChapter === 3) { // Hide inputs when the story ends.
           document.getElementById("inputs").style.display = "none";
@@ -83,6 +103,7 @@
     }
     generateProblem(onChapter, 1, 5, 19)
     // Show first chapter on page load
+    showDescription();
     showChapter();
   </script>
 </body>
