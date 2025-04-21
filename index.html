@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="desc"></h1>
+  <h1 id="desc" style="text-align: center;"></h1>
   <img src="grinden.png" style="width: 40%; display: block; margin: 0 auto;">
   <p id="chapter"></p>
   <div id="print-area" style="display: none;">
@@ -20,14 +20,24 @@
     <button onclick="printList()">🖨️ Skriv ut magiska tal</button>
     <button id="show-screen-btn" onclick="showProblem()">💻 Visa magiska tal på skärm</button>
   </div>
+  <button id="again" onclick="startOver()" style="float: right;">Börja om från början</button>
+
   <!-- ============================== -->
   <!-- Javascript section begins here -->
   <!-- ============================== -->
   <script>
-    let onChapter = 1;
-    let currentCorrectAnswer = 0;
+    let isTest = true;
+    let onChapter = parseInt(localStorage.getItem("onChapter")) || 1;
+    let currentProblem = JSON.parse(localStorage.getItem("currentProblem")) || {};
 
-    function showDescription() {
+    function startOver() {
+      onChapter = 1;
+      localStorage.setItem("onChapter", onChapter);
+      document.getElementById("inputs").style.display = "block";
+      showChapter();
+    }
+
+    function showChapter() {
       const descriptionText = {
         1: `Grinden`,
         2: `Trollkarlen`,
@@ -35,33 +45,35 @@
         4: `Affären`
       };
       document.getElementById("desc").innerText = descriptionText[onChapter] || "Sovdags";
-    }
-
-  function showChapter() {
       const chapterText = {
-        1: `Du befinner dig vid utgången av ditt hus. Huset är rött och trädgården består av vildvuxit gräs med lite blandade blommor. Solen skiner på en himmel med några små moln. Det är ett staket runt gården och det finns en grusgång som leder ut ur trädgården. För att ta dig ut behöver du öppna grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det. Du går fram till grinden och ser ditt snillrika lås. Det är ett mekaniskt lås av järn och har en panel som består av 10 knappar från 0 till 9. För att få rätt kod behöver du summera alla resultat utifrån magiska siffror. Summan knappar du sedan in på panelen och är den rätt så öppnas grinden.`,
-        2: `Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn. Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är öppen. När du går på vägen börjar du höra ljudet av hovar som klampar mot vägen. Du tittar över axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak. Och såklart är det Talgalf, din gamla kompis. Du blir glad av att se honom. Ni pratar lite om tomater men sen säger Talgalf att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska formel som han gjort i alla år. Men Talgalf har blivit lite till åren och kanske är det så, medger han lite generat, att han kanske har gjort fel när han blandat ihop raketkrutet.`
-      };
+          1: `Du befinner dig vid utgången av ditt hus. Huset är rött och trädgården består av vildvuxit gräs med lite blandade blommor. Solen skiner på en himmel med några små moln. Det är ett staket runt gården och det finns en grusgång som leder ut ur trädgården. För att ta dig ut behöver du öppna grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det. Du går fram till grinden och ser ditt snillrika lås. Det är ett mekaniskt lås av järn och har en panel som består av 10 knappar från 0 till 9. För att få rätt kod behöver du summera alla resultat utifrån magiska siffror. Summan knappar du sedan in på panelen och är den rätt så öppnas grinden.`,
+          2: `Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn. Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är öppen. När du går på vägen börjar du höra ljudet av hovar som klampar mot vägen. Du tittar över axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak. Och såklart är det Talgalf, din gamla kompis. Du blir glad av att se honom. Ni pratar lite om tomater men sen säger Talgalf att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska formel som han gjort i alla år. Men Talgalf har blivit lite till åren och kanske är det så, medger han lite generat, att han kanske har gjort fel när han blandat ihop raketkrutet.`
+        };
       document.getElementById("chapter").innerText = chapterText[onChapter] || "Du kommer in i huset och sätter dig i din fåtölj och känner dig nöjd och tillfreds med dagen. Tänk vad mycket du varit med om. Du sitter där en stund innan du bestämmer för att gå och lägga dig. Snipp snapp snut, så var sagan slut!";
+      generateProblem(onChapter, 1, 5, 19)
+      if (onChapter === 1) {
+        document.querySelector("img").src = "grinden.png";
+      }
+      if (onChapter === 2) {
+        document.querySelector("img").src = "trollkarlen.png";
+      }
+      if(onChapter === 3) {
+          document.getElementById("inputs").style.display = "none";
+          localStorage.removeItem("currentProblem");
+          document.querySelector("img").src = "hemma.png";
+        }
     }
 
     function checkOnEnter(event) {
       if (event.key === 'Enter') {
         const value = parseInt(event.target.value);
-        if (value === currentCorrectAnswer) {
+        if (isTest || value === currentProblem["correctCode"]) {
           onChapter++;
-          showDescription();
+          localStorage.setItem("onChapter", onChapter);
+          localStorage.setItem("currentProblem", JSON.stringify(currentProblem));
           showChapter();
-          generateProblem(onChapter, 1, 5, 19)
           event.target.value = ''; // Clear input
           document.getElementById("print-area").style.display = "none";
-          // Byt ut bilden om kapitlet är 2 (Trollkarlen)
-          if (onChapter === 2) {
-            document.querySelector("img").src = "trollkarlen.png";
-          }
-        }
-        if(onChapter === 3) { // Hide inputs when the story ends.
-          document.getElementById("inputs").style.display = "none";
         }
       }
     }
@@ -78,14 +90,16 @@
       const problemList = document.getElementById("print-content");
       problemList.innerHTML = '';
 
-      let allAnswers = [];
+      const talArray = [];
+      const svarArray = [];
 
       for (let i = 0; i < antal; i++) {
         if (problemNr == 1) {
           const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
           const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
           const answer = tal1 + tal2;
-          allAnswers.push(answer);
+          talArray.push([tal1, tal2]);
+          svarArray.push(answer);
           const item = document.createElement('li');
           item.textContent = `${tal1} + ${tal2} = `;
           problemList.appendChild(item);
@@ -95,24 +109,29 @@
           const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
           const tal3 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
           const answer = tal1 + tal2 + tal3;
-          allAnswers.push(answer);
+          talArray.push([tal1, tal2, tal3]);
+          svarArray.push(answer);
           const item = document.createElement('li');
           item.textContent = `${tal1} + ${tal2} + ${tal3} = `;
           problemList.appendChild(item);
         }
       }
 
-      const digitString = allAnswers.join('');
-      currentCorrectAnswer = 0;
+      const digitString = svarArray.join('');
+      correctCode = 0;
       for (let char of digitString) {
         if (['2', '4', '6', '8'].includes(char)) {
-          currentCorrectAnswer++;
+          correctCode++;
         }
       }
+
+      currentProblem = {
+            antal: antal,
+            tal: talArray,
+            svar: svarArray,
+            correctCode: correctCode};
     }
-    generateProblem(onChapter, 1, 5, 19)
     // Show first chapter on page load
-    showDescription();
     showChapter();
   </script>
 </body>
