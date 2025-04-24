@@ -66,7 +66,7 @@
         document.querySelector("img").src = "flotte2.png";
       }
       if (onChapter === 4) {
-        document.querySelector("img").src = "armchair.png";
+        document.querySelector("img").src = "store.png";
       }
       if (onChapter === 5) {
           document.getElementById("inputs").style.display = "none";
@@ -101,14 +101,29 @@
 
     function showProblem() {
       document.getElementById("print-area").style.display = "block";
+
+      // Update html for the print-content
+      const problemList = document.getElementById("print-content");
+      problemList.innerHTML = '';
+      for(let i = 0; i < currentProblem["antal"]; i++) {
+        const item = document.createElement('li');
+        if(onChapter == 1) {
+          item.textContent = `${currentProblem["tal"][i][0]} + ${currentProblem["tal"][i][1]} = `;
+        }
+        if(onChapter == 2) {
+          item.textContent = `${currentProblem["tal"][i][0]} + ${currentProblem["tal"][i][1]} + ${currentProblem["tal"][i][2]} = `;
+        }
+        problemList.appendChild(item);
+      }
     }
 
     function generateProblem() {
-      const problemList = document.getElementById("print-content");
-      problemList.innerHTML = '';
+      // const problemList = document.getElementById("print-content");
+      // problemList.innerHTML = '';
 
       const talArray = [];
       const svarArray = [];
+      let antal;
 
       if (onChapter == 1) {
         antal = 2;
@@ -120,9 +135,9 @@
           const answer = tal1 + tal2;
           talArray.push([tal1, tal2]);
           svarArray.push(answer);
-          const item = document.createElement('li');
-          item.textContent = `${tal1} + ${tal2} = `;
-          problemList.appendChild(item);
+          // const item = document.createElement('li');
+          // item.textContent = `${tal1} + ${tal2} = `;
+          // problemList.appendChild(item);
         }
       }
       if (onChapter == 2) {
@@ -136,9 +151,9 @@
           const answer = tal1 + tal2 + tal3;
           talArray.push([tal1, tal2, tal3]);
           svarArray.push(answer);
-          const item = document.createElement('li');
-          item.textContent = `${tal1} + ${tal2} + ${tal3} = `;
-          problemList.appendChild(item);
+          // const item = document.createElement('li');
+          // item.textContent = `${tal1} + ${tal2} + ${tal3} = `;
+          // problemList.appendChild(item);
         }
       }
 
