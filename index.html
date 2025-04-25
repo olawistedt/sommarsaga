@@ -28,7 +28,7 @@
   <!-- Javascript section begins here -->
   <!-- ============================== -->
   <script>
-    let isTest = true;
+    let isTest = false;
     let onChapter = parseInt(localStorage.getItem("onChapter")) || 1;
     let currentProblem = JSON.parse(localStorage.getItem("currentProblem")) || {};
 
@@ -108,18 +108,43 @@
       // Update html for the print-content
       const problemList = document.getElementById("print-content");
       problemList.innerHTML = '';
-      for(let i = 0; i < currentProblem["antal"]; i++) {
+
+      for (let i = 0; i < currentProblem["antal"]; i++) {
         const item = document.createElement('li');
-        if(onChapter == 1) {
-          item.textContent = `${currentProblem["tal"][i][0]} + ${currentProblem["tal"][i][1]} = `;
+        item.style.display = "flex"; // Use flexbox for horizontal layout
+        item.style.alignItems = "center"; // Vertically align items
+
+        let taskText = '';
+        if (onChapter == 1) {
+          taskText = `${currentProblem["tal"][i][0]} + ${currentProblem["tal"][i][1]} = `;
         }
-        if(onChapter == 2) {
-          item.textContent = `${currentProblem["tal"][i][0]} + ${currentProblem["tal"][i][1]} + ${currentProblem["tal"][i][2]} = `;
+        if (onChapter == 2) {
+          taskText = `${currentProblem["tal"][i][0]} + ${currentProblem["tal"][i][1]} + ${currentProblem["tal"][i][2]} = `;
         }
+
+        // Create a span for the task text to keep it organized
+        const taskSpan = document.createElement('span');
+        taskSpan.textContent = taskText;
+
+        // Create the input box
+        const inputBox = document.createElement('input');
+        inputBox.type = "number";
+        inputBox.placeholder = "Svar";
+        inputBox.style.marginLeft = "10px"; // Add some space between task and input
+
+        // Add the task text and input box to the list item
+        item.appendChild(taskSpan);
+        if (!doPrint) {
+          item.appendChild(inputBox); // Only show the input box when not printing
+        }
+
+        // Add the item to the problem list
         problemList.appendChild(item);
       }
-      if(doPrint) {
-        window.print()
+
+      // Print handling
+      if (doPrint) {
+        window.print();
       } else {
         document.getElementById("print-area").style.display = "block";
       }
