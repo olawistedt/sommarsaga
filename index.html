@@ -41,7 +41,6 @@
     }
 
     function showChapter() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       const descriptionText = {
         1: `Grinden`,
         2: `Trollkarlen`,
@@ -87,7 +86,11 @@
           generateProblem()
           showChapter();
           event.target.value = ''; // Clear input
+          event.target.blur(); // This closes the keyboard on mobile
           document.getElementById("print-area").style.display = "none";
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }, 300); // Let the keyboard close before scrolling
         }
         else {
           document.getElementById("feedback").style.display = "block";
