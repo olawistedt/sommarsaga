@@ -54,7 +54,7 @@
           1: `Du befinner dig vid utgången av ditt hus. Huset är rött och trädgården består av vildvuxit gräs med lite blandade blommor. Solen skiner på en himmel med några små moln. Det är ett staket runt gården och det finns en grusgång som leder ut ur trädgården. För att ta dig ut behöver du öppna grinden. Eftersom staketet är ett magiskt staket så kan du inte klättra över det. Du går fram till grinden och ser ditt snillrika lås. Det är ett mekaniskt lås av järn och har ett vred som har 10 siffror från 0 till 9. För att få rätt kod behöver du räkna ut alla tal, som består av magiska siffror. Utifrån en formel du får nedan så vrider du sedan in rätt kombination och då kan du öppna grinden.`,
           2: `Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn. Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är öppen. När du går på vägen börjar du höra ljudet av hovar som klampar mot vägen. Du tittar över axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak. Och såklart är det Talgalf, din gamla kompis. Du blir glad av att se honom. Ni pratar lite om tomater men sen säger Talgalf att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska formel som han gjort i alla år. Men Talgalf har blivit lite till åren och kanske är det så, medger han lite generat, att han kanske har gjort fel när han blandat ihop raketkrutet. Självklart bestämmer du dig för att hjälpa honom. Alla raketer har tre magiska typer av pulver. Genom att summera vikten av varje typ av pulver så kommer det på ett magiskt vis visa hur du kan fördela om varje pulver så att raketerna kommer att lysa.`,
           3: `Du fortsätter din promenad mot byn. Du går genom skogen och hör fåglarna kvittra, det är en härlig dag. Du kommer fram till repflotten. Någon har saboterat flotten, det måste vara ett troll tänker du. Men det är bara att fixa flotten. Som tur är så är brädorna märkta med siffror. Alla brädor ska vara sammanfogade i en längd av 2025 cm. Du tar de längsta brädorna och letar sen upp de små brädorna som passar med dem.`,
-          4: `Du ställer dig på flotten och drar dig framåt mot andra sidan ån. Du ser några änder simma bredvid dig. Väl över på andra sidan känner du dig lite trött i armarna. Stigen fortsätter och du närmar dig byn. Nu hör du ett svagt sorl av röster och vet att det är lång kö utanför Snultorks affär och det är många ämnen som ska avhandlas av de sällskapstörstande Almlövsborna. Du går på och närmar dig byn. Du ser nu husen och affärerna. Till höger ser du stenbrottet och arbetarna som jobbar där, och till vänster ser du guldgruvan. Du går fram och ställer dig sist i kön till affären. Näst sist står lyckligtvis den snälla och intressanta Snalva. Hon är lite bekymrad om hennes pengar kommer att räcka till alla sakerna hon har på sin inköpslista. Du bestämmer dig för att räkna ut vad det kostar och skjuta till pengarna som saknas. Hur många mynt behöver du skjuta till?`,
+          4: `Du ställer dig på flotten och drar dig framåt mot andra sidan ån. Du ser några änder simma bredvid dig. Väl över på andra sidan känner du dig lite trött i armarna. Stigen fortsätter och du närmar dig byn. Nu hör du ett svagt sorl av röster och vet att det är lång kö utanför Snultorks affär och det är många ämnen som ska avhandlas av de sällskapstörstande Almlövsborna. Du går på och närmar dig byn. Du ser nu husen och affärerna. Till höger ser du stenbrottet och arbetarna som jobbar där, och till vänster ser du guldgruvan. Du går fram och ställer dig sist i kön till affären. Näst sist står lyckligtvis den snälla och intressanta Fnalva. Hon är lite bekymrad om hennes pengar kommer att räcka till alla sakerna hon har på sin inköpslista. Du bestämmer dig för att räkna ut vad det kostar och skjuta till pengarna som saknas. Hur många mynt behöver du skjuta till?`,
           5: `Det var allt för den här gången. Se till att återkomma för att fortsätta äventyret.`,          
         };
       document.getElementById("chapter").innerText = chapterText[onChapter] || "Du kommer in i huset och sätter dig i din fåtölj och känner dig nöjd och tillfreds med dagen. Tänk vad mycket du varit med om. Du sitter där en stund innan du bestämmer för att gå och lägga dig. Snipp snapp snut, så var sagan slut!";
@@ -77,23 +77,34 @@
           document.querySelector("img").src = "armchair.png";
         }
     }
-
     function checkOnEnter(event) {
       if (event.key === 'Enter') {
         const value = parseInt(event.target.value);
         if (isTest || value === currentProblem["correctCode"]) {
-          onChapter++;
-          localStorage.setItem("onChapter", onChapter);
-          generateProblem()
-          showChapter();
-          event.target.value = ''; // Clear input
-          event.target.blur(); // This closes the keyboard on mobile
-          document.getElementById("print-area").style.display = "none";
+          const solvedText = {
+            1: `Låset ger ifrån sig ett klick och grinden öppnas med ett gnissel`,
+            2: `Talgalf åker iväg och skjuter upp en raket`,
+            3: `Du lägger flotten i vattnet och den flyter`,
+            4: `Fnalva tar tacksamt emot dina pengar och beger sig in i affären`,
+            5: ``
+          };
+          document.getElementById("feedback").innerText = solvedText[onChapter];
+          document.getElementById("feedback").style.display = "block";
+          document.getElementById("feedback").style.color = "green";
+          setTimeout(() => {
+            onChapter++;
+            localStorage.setItem("onChapter", onChapter);
+            generateProblem();
+            showChapter();
+            event.target.value = ''; // Clear input
+            event.target.blur(); // This closes the keyboard on mobile
+            document.getElementById("print-area").style.display = "none";
+            document.getElementById("feedback").style.display = "none";
+          }, 5000);
           setTimeout(() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }, 300); // Let the keyboard close before scrolling
-        }
-        else {
+        } else {
           document.getElementById("feedback").style.display = "block";
           document.getElementById("feedback").style.color = "red";
           // Hide the text after 3 seconds
