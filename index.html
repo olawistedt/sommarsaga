@@ -19,7 +19,10 @@
       <ul id="print-content"></ul>
     </div>
     <div id="inputs">
-      <input type="number" id="answer" placeholder="Skriv in magisk kod..." onkeydown="checkOnEnter(event)">
+      <div style="display: flex; gap: 0.5em;">
+        <input type="number" id="answer" placeholder="Skriv in magisk kod..." onkeydown="checkOnEnter(event)">
+        <button onclick="submitAnswer()">Stoppa i påsen</button>
+      </div>
       <button onclick="showProblem(true)">🖨️ Skriv ut magiska tal</button>
       <button id="show-screen-btn" onclick="showProblem(false)">💻 Visa magiska tal på skärm</button>
     </div>
@@ -31,7 +34,7 @@
   <!-- Javascript section begins here -->
   <!-- ============================== -->
   <script>
-    let isTest = false;
+    let isTest = true;
     let onChapter = parseInt(localStorage.getItem("onChapter")) || 1;
     let currentProblem = JSON.parse(localStorage.getItem("currentProblem")) || {};
 
@@ -51,7 +54,9 @@
         2: `Trollkarlen`,
         3: `Repflotten`,
         4: `Affären`,
-        5: `På återseende`
+        5: `Bron`,
+        6: `Trollet`,
+        7: `På återseende`
       };
       document.getElementById("desc").innerText = descriptionText[onChapter] || "Sovdags";
       const chapterText = {
@@ -59,7 +64,9 @@
           2: `Gnisslet påminner dig om att du behöver smörja grinden. Du går glatt ut på vägen som leder in till byn. Idag är det tisdag och tisdag är dagen du måste handla, för tisdagar är den enda dagen affären är öppen. När du går på vägen börjar du höra ljudet av hovar som klampar mot vägen. Du tittar över axeln och ser att det är en trollkarl som är ute och åker i sin vagn i sakta mak. Och såklart är det Talgalf, din gamla kompis. Du blir glad av att se honom. Ni pratar lite om tomater men sen säger Talgalf att han har ett problem. Raketerna han har vill inte längre lysa trots att han använt samma kemiska formel som han gjort i alla år. Men Talgalf har blivit lite till åren och kanske är det så, medger han lite generat, att han kanske har gjort fel när han blandat ihop raketkrutet. Självklart bestämmer du dig för att hjälpa honom. Alla raketer har tre magiska typer av pulver. Genom att summera vikten av varje typ av pulver så kommer det på ett magiskt vis visa hur du kan fördela om varje pulver så att raketerna kommer att lysa.`,
           3: `Du fortsätter din promenad mot byn. Du går genom skogen och hör fåglarna kvittra, det är en härlig dag. Du kommer fram till repflotten. Någon har saboterat flotten, det måste vara ett troll tänker du. Men det är bara att fixa flotten. Som tur är så är brädorna märkta med siffror. Alla brädor ska vara sammanfogade i en längd av 2025 cm. Du tar de längsta brädorna och letar sen upp de små brädorna som passar med dem.`,
           4: `Du ställer dig på flotten och drar dig framåt mot andra sidan ån. Du ser några änder simma bredvid dig. Väl över på andra sidan känner du dig lite trött i armarna. Stigen fortsätter och du närmar dig byn. Nu hör du ett svagt sorl av röster och vet att det är lång kö utanför Snultorks affär och det är många ämnen som ska avhandlas av de sällskapstörstande Almlövsborna. Du går på och närmar dig byn. Du ser nu husen och affärerna. Till höger ser du stenbrottet och arbetarna som jobbar där, och till vänster ser du guldgruvan. Du går fram och ställer dig sist i kön till affären. Näst sist står lyckligtvis den snälla och intressanta Fnulan. Hon är lite bekymrad om hennes pengar kommer att räcka till alla sakerna hon har på sin inköpslista. Du bestämmer dig för att räkna ut vad det kostar och skjuta till pengarna som saknas. Hur många mynt behöver du skjuta till?`,
-          5: `Det var allt för den här gången. Se till att återkomma för att fortsätta äventyret.`,          
+          5: `Du stoppar ner dina varor i din magiska säck, en säck som alltid väger 1 kg oavsett hur mycket den innehåller.`,
+          6: `Du går över bron.`,
+          7: `Du kliver över det knockade trollet och fortsätter din promendad. Det var allt för den här gången. Se till att återkomma för att fortsätta äventyret.`,          
         };
       document.getElementById("chapter").innerText = chapterText[onChapter] || "Du kommer in i huset och sätter dig i din fåtölj och känner dig nöjd och tillfreds med dagen. Tänk vad mycket du varit med om. Du sitter där en stund innan du bestämmer för att gå och lägga dig. Snipp snapp snut, så var sagan slut!";
       if (onChapter === 1) {
@@ -75,10 +82,22 @@
         document.querySelector("img").src = "store.png";
       }
       if (onChapter === 5) {
+        document.querySelector("img").src = "bron.png";
+      }
+      if (onChapter === 6) {
+        document.querySelector("img").src = "trollet.png";
+      }
+      if (onChapter === 7) {
           document.getElementById("inputs").style.display = "none";
           localStorage.removeItem("currentProblem");
           document.querySelector("img").src = "armchair.png";
         }
+    }
+
+    function submitAnswer() {
+      const input = document.getElementById("answer");
+      const fakeEvent = { key: 'Enter', target: input };
+      checkOnEnter(fakeEvent);
     }
 
     function checkOnEnter(event) {
@@ -90,7 +109,9 @@
             2: `Bra jobbat! Talgalf åker iväg i sakta mak. En raket flyger från hans vagn upp mot himlen och sprider ett mäktigt fyrverkeri.`,
             3: `Bra jobbat! Du lägger flotten i vattnet och den flyter`,
             4: `Bra jobbat! Fnulan tar tacksamt emot dina pengar och beger sig in i affären`,
-            5: ``
+            5: `Bra jobbat! Bron byggs ihop`,
+            6: `Bra jobbat! Trollet knockas medvetslöst.`,
+            7: ``
           };
           document.getElementById("panel").style.display = "none";
           document.getElementById("feedback").innerText = solvedText[onChapter];
