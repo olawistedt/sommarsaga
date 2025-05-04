@@ -189,7 +189,14 @@
         document.getElementById("print-area").style.display = "block";
       }
     }
-
+    function myRandom(min, max) {
+      let num;
+      do {
+        num = Math.floor(Math.random() * (max - min + 1)) + min;
+      } while (num.toString().includes('0'));
+      return num;
+    }
+    
     function generateProblem() {
       const talArray = [];
       const svarArray = [];
@@ -200,8 +207,8 @@
         minTal = 5;
         maxTal = 19;
         for (let i = 0; i < antal; i++) {
-          const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
-          const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+          const tal1 = myRandom(minTal, maxTal)
+          const tal2 = myRandom(minTal, maxTal)
           const answer = tal1 + tal2;
           talArray.push([tal1, tal2]);
           svarArray.push(answer);
@@ -212,9 +219,9 @@
         minTal = 5;
         maxTal = 19;
         for (let i = 0; i < antal; i++) {
-          const tal1 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
-          const tal2 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
-          const tal3 = Math.floor(Math.random() * (maxTal - minTal + 1)) + minTal;
+          const tal1 = myRandom(minTal, maxTal)
+          const tal2 = myRandom(minTal, maxTal)
+          const tal3 = myRandom(minTal, maxTal)
           const answer = tal1 + tal2 + tal3;
           talArray.push([tal1, tal2, tal3]);
           svarArray.push(answer);
